@@ -40,7 +40,6 @@ public class Game : MonoBehaviour
 	//	public GameObject groundLandTotal;
 
 	//Score Variables
-	private float distance;
 	private int score;
 	private int highScore;
 	public int bananas;
@@ -48,21 +47,9 @@ public class Game : MonoBehaviour
 	public Text playingBananaLabel;
 	public Text pauseLivesLabel;
 	public Text pauseBananaLabel;
+	public Text endBananaLabel;
+	public Text endHighScoreLabel;
 
-	//	public UILabel coinLabel;
-	//	public UILabel scoreLabel;
-	//	public UILabel highScoreLabel;
-
-	//Shop Variables
-	//	public static int costume = 0;
-	//	public static bool bought0 = false;
-	//	public static bool bought1 = false;
-	//	public static bool bought2 = false;
-	//	public UILabel priceKaiokenLabel;
-	//	public UILabel priceNormalLabel;
-	//	public UILabel priceGodLabel;
-	//	public UILabel shopCoinLabel;
-	//	public GameObject notEnoughMoneyNotification;
 
 	//Manager Variables
 	//public GameObject Instantiator;
@@ -84,19 +71,7 @@ public class Game : MonoBehaviour
 		}
 
 	}
-	// UI Control Panel
-	//		GameGui.instance.PushPanel ("HomePanel");
 
-	/*	Yes NO dialogue
-			AlertPanel.Show("Do you want to ...", (ok)=>{
-				if(ok){
-					
-				}
-				else{
-					
-				}
-			},true);
-*/
 	void Start ()
 	{		
 		home = true;
@@ -243,10 +218,6 @@ public class Game : MonoBehaviour
 		playingBananaLabel.text = bananas.ToString ();
 	}
 
-	//	void SetCoin(){
-	//		playingCoinLabel.text = coins.ToString();
-	//	}
-
 	void SetLives ()
 	{
 		playingLivesLabel.text = Health.instance.lives.ToString ();
@@ -262,161 +233,38 @@ public class Game : MonoBehaviour
 		pauseLivesLabel.text = Health.instance.lives.ToString ();
 	}
 
-	//	void SetFinalCoin(){
-	//		PlayerPrefs.SetInt ("Coins",coins + PlayerPrefs.GetInt("Coins"));
-	//		int finalCoin = PlayerPrefs.GetInt ("Coins");
-	//		coinLabel.text = finalCoin.ToString();
-	//	}
-	//
-	//	void SetFinalScore(){
-	//		distance = playerController.current.transform.position.x;
-	//		score = (int) distance / 2;
-	//		scoreLabel.text = score + "m";
-	//		if (score > PlayerPrefs.GetInt ("HighScore")) {
-	//			PlayerPrefs.SetInt ("HighScore", score);
-	//			highScoreLabel.text = PlayerPrefs.GetInt ("HighScore") + "m";
-	//			return;
-	//		}
-	//		highScoreLabel.text = PlayerPrefs.GetInt ("HighScore") + "m";
-	//	}
+	void SetFinalBanana ()
+	{
+		endBananaLabel.text = bananas.ToString ();
+	}
 
-		public void Home(){
-			//SoundManager.instance.PlayButtonSound ();
-			//SoundManager.instance.PlayTitleMusic();
-			home = true;
-			playing = false;
-			pause = false;
-			end = false;
-			PlayScreen.SetActive (false);
-			PauseScreen.SetActive (false);
-			EndScreen.SetActive (false);
-			//ShopScreen.SetActive (false);
-			HomeScreen.SetActive (true);
-			highScore = PlayerPrefs.GetInt ("HighScore");
-			InstantiateObjects.current.DestroyObjects ();
+	void SetFinalScore ()
+	{
+		if (bananas > PlayerPrefs.GetInt ("HighScore")) {
+			PlayerPrefs.SetInt ("HighScore", bananas);
+			endHighScoreLabel.text = PlayerPrefs.GetInt ("HighScore").ToString ();
+			return;
 		}
-	//
-	//	public void Shop(){
-	//		SoundManager.instance.PlayButtonSound ();
-	//		home = true;
-	//		playing = false;
-	//		pause = false;
-	//		end = false;
-	//		PlayScreen.SetActive (false);
-	//		PauseScreen.SetActive (false);
-	//		EndScreen.SetActive (false);
-	//		HomeScreen.SetActive (false);
-	//		coins = PlayerPrefs.GetInt ("Coins");
-	//		shopCoinLabel.text = coins.ToString();
-	//		if (bought1) {
-	//			priceKaiokenLabel.text = "Bought";
-	//		}
-	//		if (bought2) {
-	//			priceGodLabel.text = "Bought";
-	//		}
-	//		if (bought0) {
-	//			priceNormalLabel.text = "Bought";
-	//		}
-	//		if (costume == 0 && bought0) {
-	//			priceNormalLabel.text = "Equipped";
-	//			priceNormalLabel.transform.parent.transform.GetChild (0).gameObject.SetActive (true);
-	//		} else if (costume == 1 && bought1) {
-	//			priceKaiokenLabel.text = "Equipped";
-	//			priceKaiokenLabel.transform.parent.transform.GetChild (0).gameObject.SetActive (true);
-	//		} else if (costume == 2 && bought2) {
-	//			priceGodLabel.text = "Equipped";
-	//			priceGodLabel.transform.parent.transform.GetChild (0).gameObject.SetActive (true);
-	//		}
-	//		ShopScreen.SetActive (true);
-	//
-	//	}
-	//
-	//	public void BuyCostume(UILabel obj){
-	//		coins = PlayerPrefs.GetInt ("Coins");
-	//		if (obj.text.Equals("Costume 2")) {
-	//			if (coins >= 50 && !bought1) {
-	//				coins -= 50;
-	//				PlayerPrefs.SetInt ("Coins",coins);
-	//				costume = 1;
-	//				bought1 = true;
-	//				PlayerPrefs.SetInt ("Costume1",1);
-	//				Shop ();
-	//				Debug.Log ("Costume 2");
-	//			}else if(bought1){
-	//				costume = 1;
-	//				priceKaiokenLabel.text = "Equipped";
-	//				obj.gameObject.transform.parent.transform.GetChild (0).gameObject.SetActive (true);
-	//				if (bought0) {
-	//					priceNormalLabel.text = "Bought";
-	//					priceNormalLabel.transform.parent.transform.GetChild (0).gameObject.SetActive (false);
-	//				}
-	//				if (bought2) {
-	//					priceGodLabel.text = "Bought";
-	//					priceGodLabel.transform.parent.transform.GetChild (0).gameObject.SetActive (false);
-	//				}
-	//			}else if(coins < 50){
-	//				notEnoughMoneyNotification.SetActive (true);
-	//				ShopScreen.SetActive (false);
-	//			}
-	//		} else if(obj.text == "Costume 1"){
-	//			if(coins >= 50 && !bought0 ) {
-	//				coins -= 50;
-	//				PlayerPrefs.SetInt ("Coins",coins);
-	//				costume = 0;
-	//				bought0 = true;
-	//				PlayerPrefs.SetInt ("Costume0",1);
-	//				Shop ();
-	//				Debug.Log ("Costume 1");
-	//			}else if(bought0){
-	//				costume = 0;
-	//				priceNormalLabel.text = "Equipped";
-	//				priceNormalLabel.transform.parent.transform.GetChild (0).gameObject.SetActive (true);
-	//				if (bought1) {
-	//					priceKaiokenLabel.text = "Bought";
-	//					priceKaiokenLabel.transform.parent.transform.GetChild (0).gameObject.SetActive (false);
-	//				}
-	//				if (bought2) {
-	//					priceGodLabel.text = "Bought";
-	//					priceGodLabel.transform.parent.transform.GetChild (0).gameObject.SetActive (false);
-	//				}
-	//			}else if(coins < 50){
-	//				notEnoughMoneyNotification.SetActive (true);
-	//				ShopScreen.SetActive (false);
-	//			}
-	//		}	else if(obj.text == "Costume 3"){
-	//			if(coins >= 300 && !bought2 ) {
-	//				coins -= 300;
-	//				PlayerPrefs.SetInt ("Coins",coins);
-	//				costume = 2;
-	//				bought2 = true;
-	//				PlayerPrefs.SetInt ("Costume2",1);
-	//				Shop ();
-	//				Debug.Log ("Costume 3");
-	//			}
-	//			else if(bought2){
-	//				costume = 2;
-	//				priceGodLabel.text = "Equipped";
-	//				priceGodLabel.transform.parent.transform.GetChild (0).gameObject.SetActive (true);
-	//				if (bought0) {
-	//					priceNormalLabel.text = "Bought";
-	//					priceNormalLabel.transform.parent.transform.GetChild (0).gameObject.SetActive (false);
-	//				}
-	//				if (bought1) {
-	//					priceKaiokenLabel.text = "Bought";
-	//					priceKaiokenLabel.transform.parent.transform.GetChild (0).gameObject.SetActive (false);
-	//				}
-	//			}else if(coins < 300){
-	//				notEnoughMoneyNotification.SetActive (true);
-	//				ShopScreen.SetActive (false);
-	//			}
-	//		}
-	//	}
-	//
-	//	public void CloseNotification(){
-	//		notEnoughMoneyNotification.SetActive (false);
-	//		ShopScreen.SetActive (true);
-	//	}
-	//
+		endHighScoreLabel.text = PlayerPrefs.GetInt ("HighScore").ToString ();
+	}
+
+	public void Home ()
+	{
+		//SoundManager.instance.PlayButtonSound ();
+		//SoundManager.instance.PlayTitleMusic();
+		home = true;
+		playing = false;
+		pause = false;
+		end = false;
+		PlayScreen.SetActive (false);
+		PauseScreen.SetActive (false);
+		EndScreen.SetActive (false);
+		//ShopScreen.SetActive (false);
+		HomeScreen.SetActive (true);
+		highScore = PlayerPrefs.GetInt ("HighScore");
+		InstantiateObjects.current.DestroyObjects ();
+	}
+
 	public void Play ()
 	{
 		//SoundManager.instance.PlayButtonSound ();
@@ -431,49 +279,29 @@ public class Game : MonoBehaviour
 		bananas = 0;
 		highScore = PlayerPrefs.GetInt ("HighScore");
 		InstantiateObjects.current.InstanObjects ();	     
-		//SetScore ();
+		SetScore ();
 	}
-	//
-	//	public void RePlay(){
-	//		UM_AdManager.LoadInterstitialAd();
-	//		App.instance.hideBanner ();
-	//		SoundManager.instance.PlayButtonSound ();
-	//		playing = true;
-	//		home = false;
-	//		pause = false;
-	//		end = false;
-	//		PlayScreen.SetActive (true);
-	//		PauseScreen.SetActive (false);
-	//		EndScreen.SetActive (false);
-	//		HomeScreen.SetActive (false);
-	//		generatePlatformSpace = 4f;
-	//		generateGroundSpace = 4f;
-	//		highScore = PlayerPrefs.GetInt ("HighScore");
-	//		InstantiateObjects.current.DestroyObjects ();
-	//		InstantiateObjects.current.InstanObjects ();
-	//
-	//		groundLandTotal = InstantiateObjects.current.pObj.transform.Find("GroundLandTotal(Clone)").gameObject;
-	//		if (Game.costume == 1) {
-	//			groundLandTotal.transform.GetChild (1).gameObject.SetActive (true);
-	//			groundLandTotal.transform.GetChild (0).gameObject.SetActive (false);
-	//			Debug.Log ("Naruto");
-	//		} else if(Game.costume == 0){
-	//			groundLandTotal.transform.GetChild (0).gameObject.SetActive (true);
-	//			groundLandTotal.transform.GetChild (1).gameObject.SetActive (false);
-	//			Debug.Log ("Goku");
-	//		} else if(Game.costume == 2){
-	//			groundLandTotal.transform.GetChild (0).gameObject.SetActive (true);
-	//			groundLandTotal.transform.GetChild (1).gameObject.SetActive (false);
-	//			Debug.Log ("Goku");
-	//		}
-	//
-	//		cameraFollow2DPlayer.cam.ResetCamera ();
-	//		cameraFollow2DPlayer.cam.ActiveCamera ();
-	//		distance = playerController.current.transform.position.x;
-	//		SetScore ();
-	//		coins = 0;
-	//	}
-	//
+
+	public void RePlay ()
+	{
+			
+		//SoundManager.instance.PlayButtonSound ();
+		playing = true;
+		home = false;
+		pause = false;
+		end = false;
+		PlayScreen.SetActive (true);
+		PauseScreen.SetActive (false);
+		EndScreen.SetActive (false);
+		HomeScreen.SetActive (false);			
+		highScore = PlayerPrefs.GetInt ("HighScore");
+		InstantiateObjects.current.DestroyObjects ();
+		InstantiateObjects.current.InstanObjects ();
+		PlayerController.instance.Reset ();
+		SetScore ();
+		bananas = 0;
+	}
+
 	public void Pause ()
 	{
 		//SoundManager.instance.PlayButtonSound ();
@@ -496,21 +324,22 @@ public class Game : MonoBehaviour
 			PauseScreen.SetActive (false);	
 		}
 	}
-	
-		public void EndGame(){
-			//App.instance.showInterstitialAd ();
-			home = false;
-			pause = false;
-			playing = false;
-			end = true;
-			PlayScreen.SetActive (false);
-			PauseScreen.SetActive (false);
-			EndScreen.SetActive (true);
-			HomeScreen.SetActive (false);
-			highScore = PlayerPrefs.GetInt ("HighScore");
-			//SetFinalScore ();
-			//SetFinalCoin ();
-			InstantiateObjects.current.DestroyObjects ();
-		}
+
+	public void EndGame ()
+	{
+		//App.instance.showInterstitialAd ();
+		home = false;
+		pause = false;
+		playing = false;
+		end = true;
+		PlayScreen.SetActive (false);
+		PauseScreen.SetActive (false);
+		EndScreen.SetActive (true);
+		HomeScreen.SetActive (false);
+		highScore = PlayerPrefs.GetInt ("HighScore");
+		SetFinalScore ();
+		SetFinalBanana ();
+		InstantiateObjects.current.DestroyObjects ();
+	}
 
 }

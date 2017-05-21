@@ -3,14 +3,14 @@ using System.Collections;
 
 public class InstantiateObjects : MonoBehaviour
 {
-	public GameObject mapTotal;
+	public GameObject bananaItem;
 	public static InstantiateObjects current;
 
 	GameObject obj, obj1, obj2, obj3, obj4, obj5, obj6;
 
 
 	public GameObject parentObj;
-	public GameObject pObj;
+	GameObject pObj;
 
 	void Awake ()
 	{
@@ -33,21 +33,20 @@ public class InstantiateObjects : MonoBehaviour
 	{
 		pObj = Instantiate (parentObj) as GameObject;
 		ObjectPooler.current.RePoolObjects ();
-		obj = Instantiate (mapTotal) as GameObject;
+		obj = Instantiate (bananaItem) as GameObject;
 		obj.transform.parent = ParentObjects.Instance.transform;
-		obj.transform.localPosition = new Vector3 (-1f, transform.localPosition.y, transform.localPosition.z);
 		obj.SetActive (true);
 	}
 
-	public void ReInstanObjects ()
-	{
-		pObj = Instantiate (parentObj) as GameObject;
-		ObjectPooler.current.RePoolObjects ();
-		obj = Instantiate (mapTotal) as GameObject;
-		obj.transform.parent = ParentObjects.Instance.transform;
-		obj.transform.localPosition = new Vector3 (-1f, transform.localPosition.y, transform.localPosition.z);
-		obj.SetActive (true);
-	}
+//	public void ReInstanObjects ()
+//	{
+//		pObj = Instantiate (parentObj) as GameObject;
+//		ObjectPooler.current.RePoolObjects ();
+//		obj = Instantiate (mapTotal) as GameObject;
+//		obj.transform.parent = ParentObjects.Instance.transform;
+//		obj.transform.localPosition = new Vector3 (-1f, transform.localPosition.y, transform.localPosition.z);
+//		obj.SetActive (true);
+//	}
 
 	public void SpawnBananaRight (float space)
 	{
@@ -152,15 +151,6 @@ public class InstantiateObjects : MonoBehaviour
 			obj6.SetActive (true);
 		}
 	}
-		
-	//	public void SpawnCoins(float space){
-	//		obj5 = (GameObject) ObjectPooler.current.GetPooledCoins();
-	//		if (obj5 != null) {
-	//			obj5.transform.parent = ParentObjects.Instance.transform;
-	//			obj5.transform.position = new Vector3 (space, Random.Range(-1f,1.5f), 0f);
-	//			obj5.SetActive (true);
-	//		}
-	//	}
 
 	public void DestroyObjects ()
 	{

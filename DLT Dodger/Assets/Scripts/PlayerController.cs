@@ -56,6 +56,17 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
+	public void Reset(){
+		transform.position = new Vector3 (10,0,100);
+		moveDirection = Vector2.zero;
+		isHit = false;
+		isDead = false;
+		isJumping = false;
+		ani.Play ("Idle");
+		ani.SetBool ("isDead", false);
+		Health.instance.lives = 3;
+	}
+
 	public void Die ()
 	{
 		if (Game.playing)
