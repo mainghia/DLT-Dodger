@@ -250,8 +250,8 @@ public class Game : MonoBehaviour
 
 	public void Home ()
 	{
-		//SoundManager.instance.PlayButtonSound ();
-		//SoundManager.instance.PlayTitleMusic();
+		SoundManager.instance.PlayButtonSound ();
+		SoundManager.instance.PlayTitleMusic();
 		home = true;
 		playing = false;
 		pause = false;
@@ -259,7 +259,6 @@ public class Game : MonoBehaviour
 		PlayScreen.SetActive (false);
 		PauseScreen.SetActive (false);
 		EndScreen.SetActive (false);
-		//ShopScreen.SetActive (false);
 		HomeScreen.SetActive (true);
 		highScore = PlayerPrefs.GetInt ("HighScore");
 		InstantiateObjects.current.DestroyObjects ();
@@ -267,7 +266,7 @@ public class Game : MonoBehaviour
 
 	public void Play ()
 	{
-		//SoundManager.instance.PlayButtonSound ();
+		SoundManager.instance.PlayButtonSound ();
 		playing = true;
 		home = false;
 		pause = false;
@@ -285,7 +284,7 @@ public class Game : MonoBehaviour
 	public void RePlay ()
 	{
 			
-		//SoundManager.instance.PlayButtonSound ();
+		SoundManager.instance.PlayButtonSound ();
 		playing = true;
 		home = false;
 		pause = false;
@@ -304,7 +303,7 @@ public class Game : MonoBehaviour
 
 	public void Pause ()
 	{
-		//SoundManager.instance.PlayButtonSound ();
+		SoundManager.instance.PlayButtonSound ();
 		if (!pause) {
 			pause = true;
 			home = false;
@@ -327,7 +326,6 @@ public class Game : MonoBehaviour
 
 	public void EndGame ()
 	{
-		//App.instance.showInterstitialAd ();
 		home = false;
 		pause = false;
 		playing = false;

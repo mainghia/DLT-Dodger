@@ -21,6 +21,7 @@ public class ItemPickup : MonoBehaviour
 		if (Game.playing) {
 			if (other.tag == "Player") {
 				if (tag == "Banana") {
+					PlayerController.instance.PickUpSoundPlay ();
 					Debug.Log ("Banana Pickup");
 					Game.instance.bananas++;
 					Game.instance.SpawnBananaItems ();

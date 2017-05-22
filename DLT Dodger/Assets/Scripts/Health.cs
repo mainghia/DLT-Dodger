@@ -25,7 +25,8 @@ public class Health : MonoBehaviour
 
 	void Update ()
 	{
-		if (lives < 1) {
+		if (lives == 0 && PlayerController.instance.isDead == false) {
+			PlayerController.instance.isDead = true;
 			PlayerController.instance.Die ();
 		}
 	}
